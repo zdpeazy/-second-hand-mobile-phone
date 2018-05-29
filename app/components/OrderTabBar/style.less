@@ -1,0 +1,41 @@
+#orderTabBar-box{
+	width: 100%;
+	height: 0.66rem;
+	position: fixed;
+	background: #fff;
+	top: 0.8rem;
+	left: 0;
+	z-index: 1000;
+	font-size: 0;
+	border-top: 1px solid #e5e5e5;
+	.tabBar-wrapper{
+		width: 100%;
+		height: 0.66rem;
+		display: flex;
+		.orderTab-sellOrder, .orderTab-resellOrder{
+			flex: 1;
+			font-size: 0.28rem;
+			text-decoration: none;
+			color: #666666;
+			text-align: center;
+			span{
+				display: inline-block;
+				height: 0.66rem;
+				line-height: 0.66rem;
+				position: relative;
+			}
+			.active{
+				color: #76d459;
+			}
+			span.active:after{
+				content: '';
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				width: 100%;
+				height: 0.03rem;
+				background: #76d459;
+			}
+		}
+	}
+}

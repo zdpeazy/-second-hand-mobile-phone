@@ -1,0 +1,106 @@
+.loginBox .from_box {
+  padding: 0.25rem 0.3rem;
+  .item {
+    width: 100%;
+    height: 0.9rem;
+    line-height: 0.9rem;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    background: #fff;
+    font-size: 0.26rem;
+    border: 1px solid #e4e1e3;
+    border-radius: 0.4rem;
+    margin-top: 0.4rem;
+    padding: 0 0.2rem;
+    .login-icon{
+      display: block;
+      width: 0.24rem;
+      height: 0.36rem;
+      background: url('../../../static/img/phone-icon.png') no-repeat;
+      background-size: 100% 100%;
+    }
+    .captcha-icon{
+      display: block;
+      width: 0.26rem;
+      height: 0.3rem;
+      background: url('../../../static/img/captcha-icon.png') no-repeat;
+      background-size: 100% 100%;
+    }
+    input {
+      padding: 0;
+      display: block;
+      height: 0.86rem;
+      font-size: 0.26rem;
+      border: none;
+      flex: 1;
+      outline:none;
+      background: none;
+    }
+    input::-webkit-input-placeholder {
+      color: #dddddd;
+      font-size: 0.26rem;
+    }
+    .captcha {
+      flex: 1;
+    }
+    label {
+      width: 1.3rem;
+      height: 0.88rem;
+      box-sizing: border-box;
+      padding-left: 0.2rem;
+      color: #dddddd;
+    }
+    .Captcha_box {
+      .sendCaptcha {
+        line-height: 0.5rem;
+        padding: 0.1rem 0.22rem;
+        text-align: center;
+        font-size: 0.26rem;
+        color: #999999;
+        position: relative;
+        &:before{
+          content: '';
+          display: block;
+          width: 1px;
+          height: 0.3rem;
+          background: #999999;
+          position: absolute;
+          left: 0;
+          top: 50%;
+          transform: translateY(-0.15rem);
+        }
+      }
+      .sendCaptcha.disabled {
+        pointer-events: none;
+      }
+    }
+  }
+  .login_tip{
+    margin: 0;
+    height: 0.3rem;
+    line-height: 0.3rem;
+    padding: 0.3rem 0.3rem;
+    font-size: 0.24rem;
+    color: #d80031;
+  }
+  button.submit {
+    display: block;
+    width: 100%;
+    height: 0.8rem;
+    padding: 0;
+    border: 0;
+    border-radius: 4px;
+    line-height: 0.8rem;
+    text-align: center;
+    font-size: 0.3rem;
+    background: #76d459;
+    color: #fff;
+    margin: 0 auto;
+    letter-spacing: 0.1rem;
+    &.disabled{
+      pointer-events: none;
+      background: #999999;
+    }
+  }
+}

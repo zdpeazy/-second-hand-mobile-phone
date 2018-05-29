@@ -1,0 +1,36 @@
+.container .addressList{
+	.item{
+		display: flex;
+		padding: 0.34rem 0.3rem;
+		border-bottom: 1px solid #dddddd;
+		align-items: center;
+		background: #fff;
+		&:last-child{
+			border-bottom: none;
+		}
+		.addressInfo{
+			flex: 1;
+			font-size: 0.26rem;
+			span{
+				display: block;
+				margin-top: 0.2rem;
+				&:first-child{
+					margin-top: 0;
+				}
+			}
+		}
+		.select{
+			display: block;
+			width: 0.32rem;
+			height: 0.32rem;
+			border-radius: 0.32rem;
+			border: 1px solid #bbbbbb;
+			margin-right: 0.3rem;
+			&.selected{
+				background: url('../../static/img/select.png') no-repeat;
+				background-size: 100% 100%;
+				border: none;
+			}
+		}
+	}
+}

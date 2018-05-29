@@ -1,0 +1,57 @@
+.detailInfoBox{
+	margin-top: 0.12rem;
+	padding:0.2rem 0.3rem 0.2rem;
+	background: #fff;
+	.title{
+		font-size: 0.36rem;
+		font-weight: 500;
+		display: block;
+	  overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+	}
+	.price{
+		padding: 0.2rem 0 0.2rem;
+		font-size: 0;
+		span{
+			display: inline-block;
+		}
+		.newPrice{
+			font-size: 0.36rem;
+			font-weight: 500;
+			color: #ff2726;
+		}
+		.oldPrice{
+			font-size: 0.26rem;
+			font-weight: 500;
+			color: #999999;
+			text-decoration: line-through;
+			padding-left: 0.5rem;
+		}
+	}
+	.active{
+		font-size: 0.26rem;
+		display: flex;
+		span{
+			display: block;
+		}
+		.tip{
+			width: 0.36rem;
+			height: 0.36rem;
+			text-align: center;
+			line-height: 0.36rem;
+			border-radius: 0.05rem;
+			background: #ccc;
+			color: #fff;
+		}
+		.active1{
+			background: #77d25d;
+		}
+		.desc{
+			color: #5b5b5b;
+			padding-left: 0.24rem;
+			box-sizing: border-box;
+			flex: 1;
+		}
+	}
+}

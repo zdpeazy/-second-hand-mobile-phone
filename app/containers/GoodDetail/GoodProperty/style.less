@@ -1,0 +1,38 @@
+.propertyBox{
+	margin-top: 0.12rem;
+	background: #fff;
+	padding: 0.3rem;
+	font-size: 0.26rem;
+	display: flex;
+	position: relative;
+	&:after{
+		transition: all .3s ease;
+    position: absolute;
+    right: .3rem;
+    top: 50%;
+    color: #999;
+    display: inline-block;
+    border: solid #999;
+    border-width: .02rem 0 0 .02rem;
+    -webkit-transform: rotate(135deg) translateY(0.15rem);
+    width: .18rem;
+    height: .18rem;
+    content: '';
+	}
+	span{
+		display: block;
+	}
+	.label{
+		color: #7d7d7d;
+	}
+	.properties{
+		padding: 0 0.8rem 0 0.36rem;
+		flex: 1;
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		span{
+			display: inline;
+		}
+	}
+}

@@ -1,0 +1,98 @@
+.orderListBox{
+	padding-bottom: 0.98rem;
+	font-size: 0;
+	span{
+		display: block;
+	}
+	.item{
+		margin-top: 0.13rem;
+		background: #fff;
+		.statusInfo{
+			display: flex;
+			font-size: 0.26rem;
+			padding: 0.2rem 0.3rem;
+			.orderId{
+				flex: 1;
+				color: #666666;
+			}
+			.status{
+				color: #ff393c;
+			}
+		}
+		.goodInfo{
+			width: 100%;
+			height: auto;
+			box-sizing: border-box;
+			padding: 0.23rem 0.3rem 0.26rem;
+			border-top: 1px solid #f2f2f2;
+			display: flex;
+			.imgBox{
+				width: 1.38rem;
+				height: auto;
+				border: 1px solid #f2f2f2;
+				img{
+					width: 100%;
+					height: auto;
+				}
+			}
+			.info{
+				flex: 1;
+				padding-left: 0.3rem;
+				.props{
+					font-size: 0.3rem;
+					color: #000;
+					padding: 0.2rem 0 0.3rem;
+				}
+				.priceInfo{
+					display: flex;
+					.price{
+						font-size: 0.26rem;
+						color: #ff2828;
+						flex: 1;
+					}
+					.number{
+						font-size: 0.3rem;
+						color: #999999;
+					}
+				}
+			}
+		}
+		.timeInfo{
+			display: flex;
+			box-sizing: border-box;
+			padding: 0.2rem 0.3rem;
+			font-size: 0.26rem;
+			color: #666666;
+			border-top: 1px solid #f2f2f2;
+			.time{
+				flex: 1;
+			}
+		}
+		.btnBox{
+			display: flex;
+			padding: 0.15rem 0.3rem;
+			border-top: 1px solid #f2f2f2;
+			.emptyDiv{
+				flex: 1;
+			}
+			span{
+				display: inline-block;
+				width: 1.36rem;
+				height: 0.5rem;
+				line-height: 0.5rem;
+				border-radius: 4px;
+				text-align: center;
+				font-size: 0.26rem;
+			}
+			span.receiving{
+				border: 1px solid #76d459;
+				color: #76d459;
+			}
+			span.resell{
+				border: 1px solid #999999;
+				color: #999999;
+				margin-left: 0.26rem;
+			}
+		}
+	}
+}

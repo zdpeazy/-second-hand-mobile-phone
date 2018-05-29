@@ -1,0 +1,60 @@
+.resellDetail{
+	.item{
+		margin-top: 0.1rem;
+		padding: 0.15rem 0.3rem 0.1rem;
+		background: #fff;
+		font-size: 0.26rem;
+		color: #666666;
+		&:first-child{
+			margin-top: 0;
+		}
+		.span{
+			display: block;
+		}
+		.label{
+			padding: 0.08rem 0;
+			&.orderId{
+				padding-bottom: 0.2rem;
+			}
+		}
+		.nameStatus{
+			display: flex;
+			padding: 0.1rem 0;
+			.name{
+				flex: 1;
+				font-size: 0.3rem;
+				color: #000;
+			}
+			.status{
+				color: #000;
+				&.runing{
+					color: #fe2b2b;
+				}
+			}
+		}
+		.btnBox{
+			display: flex;
+			border-top: 1px solid #f2f2f2;
+			padding-top: 0.2rem;
+			.empty{
+				flex: 1;
+			}
+			span.btn{
+				display: inline-block;
+		    width: 1.36rem;
+		    height: 0.5rem;
+		    line-height: 0.5rem;
+		    border-radius: 4px;
+		    text-align: center;
+		    font-size: 0.26rem;
+		    border: 1px solid #999999;
+    		color: #999999;
+    		margin-left: 0.28rem;
+			}
+			span.btn.confirm{
+				border: 1px solid #76d459;
+    		color: #76d459;
+			}
+		}
+	}
+}
