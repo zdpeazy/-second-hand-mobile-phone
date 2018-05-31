@@ -56,7 +56,7 @@ module.exports = {
           //   secure: false
           // },
           '/api': {
-            target: 'http://m.bjysshop.com:8081',
+            target: 'http://m.bjysshop.com',
             secure: false,
             changeOrigin: true
           }

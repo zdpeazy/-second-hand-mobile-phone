@@ -43,7 +43,7 @@ class LoadMore extends React.Component {
         if(document.getElementById('tabBar-box')){
           footerHei = document.getElementById('tabBar-box').offsetHeight;
         }
-        const windowHeight = window.screen.height - footerHei;
+        const windowHeight = window.screen.height;
         if (top && top < windowHeight) {
             // 证明 wrapper 已经被滚动到暴露在页面可视范围之内了
             loadMoreFn()

@@ -57,9 +57,9 @@ class ImgCaptcha extends React.Component {
 			this.props.removeImgCaptcha(true);
 		}
 	}
-	handleCloseLayer(e){
+	handleCloseLayer(bool){
 		this.setState({imgCaptcha_tip: ''});
-		this.props.removeImgCaptcha(true);
+		this.props.removeImgCaptcha(bool);
 	}
 	render() {
 		return (
@@ -67,7 +67,7 @@ class ImgCaptcha extends React.Component {
       	<div className="imgCaptchaBox">
       		<h4 className="title">
       			提示
-      			<div className="closedBtn" onClick={this.handleCloseLayer.bind(this)}>
+      			<div className="closedBtn" onClick={this.handleCloseLayer.bind(this, false)}>
       				<i className="closed-icon"></i>
       			</div>
       		</h4>
@@ -77,7 +77,7 @@ class ImgCaptcha extends React.Component {
 	        		<span className="imgCaptchaBtn" id="checkCode" onClick={this.handleCreateCode.bind(this)}></span>
 	        	</div>
 	        	<p className="imgCaptcha_tip">{this.state.imgCaptcha_tip}</p>
-	        	<span className="checkCodeBtn" onClick={this.handleCheckCode.bind(this)}>确认</span>
+	        	<span className="checkCodeBtn" onClick={this.handleCheckCode.bind(this, true)}>确认</span>
       		</div>
       	</div>
       </div>
