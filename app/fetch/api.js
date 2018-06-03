@@ -48,21 +48,29 @@ export function getGoodProperty(token) {
 
 // 确认订单
 // orderType 1 转售订单  0 销售订单
-export function commitGoodOrder(token, goodId, needCount, orderType) {
-  const result = post('/api/commodity/commit', {
+export function commitGoodOrder(token, goodId, needCount, orderType, resaleOrderFrom, addressId) {
+  let commitInfo = {
     token: token,
     commodityId: goodId,
     needCount: needCount,
     orderType: orderType
-  })
+  }
+  if(resaleOrderFrom){
+    commitInfo = Object.assign({}, commitInfo, {
+      resaleOrderFrom: resaleOrderFrom,
+      pickUpWay: 0,
+      addressId: addressId
+    })
+  }
+  const result = post('/api/commodity/commit', commitInfo)
   return result
 }
 
-// 销售确认订单查询/api/order/detail
+// 销售和转售确认订单查询/api/order/detail
 export function orderDetail(token, orderId) {
   const result = get('/api/order/detail', {
     token: token,
-    id: orderId
+    orderNo: orderId
   })
   return result
 }
@@ -75,3 +83,36 @@ export function adressList(token) {
   return result
 }
 
+// 支付
+export function orderPay(params) {
+  const result = post('/api/commodity/pay', params)
+  return result
+}
+
+// 获取销售和转售订单列表
+export function orderList(token, orderType) {
+  const result = get('/api/order/list', {
+    token: token,
+    orderType: orderType
+  })
+  return result
+}
+
+// 获取销售订单详情
+export function payDetail(token, orderId) {
+  const result = get('/api/order/payDetail', {
+    token: token,
+    orderNo: orderId
+  })
+  return result
+}
+
+// 确认收货/api/order/userConfirmPickup
+
+export function confirmPickup(token, orderId) {
+  const result = post('/api/order/userConfirmPickup', {
+    token: token,
+    orderNo: orderId
+  })
+  return result
+}

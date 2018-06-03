@@ -1,5 +1,6 @@
 import React from 'react';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
+import loadingPng from '../../static/img/loading.png';
 
 import './style.less';
 
@@ -12,7 +13,7 @@ class Loading extends React.Component {
     return (
       <div className="loading-layer">
         <div className="loading-inner">
-          <img src="./app/static/img/loading.png" />
+          <img src={loadingPng} />
         </div>
       </div>
     )

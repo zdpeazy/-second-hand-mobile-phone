@@ -31,8 +31,6 @@ class GoodInfo extends React.Component {
   }
   componentDidMount(){
   }
-  componentWillReceiveProps(nextProps){
-  }
   render() {
     let infoData = this.props.data;
     return (
@@ -42,7 +40,7 @@ class GoodInfo extends React.Component {
             <img src={infoData.commodity.image}/>
           </div>
           <div className="infoRight">
-            <span className="props">{infoData.order.name + ' ' + infoData.order.subName}</span>
+            <span className="props">{infoData.commodity.name + ' ' + infoData.commodity.subName}</span>
             <span className="price">￥{infoData.commodity.unitPrice}</span>
             <span className="number">×{infoData.order.needCount}</span>
           </div>

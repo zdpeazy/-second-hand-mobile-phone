@@ -17,6 +17,8 @@ import Submit from './Submit';
 import * as api from '../../fetch/api';
 import * as util from '../../util';
 
+let timer = null, jumpTimer = null;
+
 class ConfirmOrder extends React.Component {
 	constructor(props, context) {
 		super(props, context);
@@ -37,13 +39,26 @@ class ConfirmOrder extends React.Component {
       return res.json();
     }).then(json => {
       if(json.code != 0){
-        util.toast(json.msg)
+        if(timer){clearTimeout(timer);clearTimeout(jumpTimer);}
+        util.toast(json.msg);
         return;
+      }
+      if(json.data.order.payStatus * 1 == 2){
+        util.toast('支付成功');
+        jumpTimer = setTimeout(() => {
+          hashHistory.replace('/SellOrder');
+        }, 1000)
       }
       this.setState({
         confirmGoodInfo: json.data
       })
     })
+    this.intervalOrderStatus();
+  }
+  intervalOrderStatus(){
+    timer = setTimeout(() => {
+      this.getOrderDetail();
+    }, 3000)
   }
   // 获取提货地址信息
   getAdressList(cb){
@@ -66,7 +81,7 @@ class ConfirmOrder extends React.Component {
     this.setState({
       payChannel: value,
       commitInfo: {
-        payChannelId: value,
+        payWay: parseInt(value) + 1,
         addressId: this.state.commitInfo.addressId
       }
     })
@@ -78,6 +93,9 @@ class ConfirmOrder extends React.Component {
     })
     this.getOrderDetail();
   }
+  componentWillUnmount(){
+    if(timer){clearTimeout(timer);clearTimeout(jumpTimer);}
+  }
   // 将页面标题文案 存储到Redux中
   componentDidMount() {
     let _this = this, addressId = '';
@@ -86,7 +104,7 @@ class ConfirmOrder extends React.Component {
       addressId = data[addressNo].id;
       _this.setState({
         commitInfo: {
-          payChannelId: _this.state.payChannel,
+          payWay: parseInt(_this.state.payChannel) + 1,
           addressId: addressId
         }
       })

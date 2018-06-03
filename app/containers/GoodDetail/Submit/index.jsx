@@ -23,7 +23,7 @@ class Submit extends React.Component {
           util.toast(json.msg)
           return;
         }
-        hashHistory.push('/ConfirmOrder/' + json.data.orderId);
+        hashHistory.push('/ConfirmOrder/' + json.data.orderNo);
       })
   }
   componentDidMount(){

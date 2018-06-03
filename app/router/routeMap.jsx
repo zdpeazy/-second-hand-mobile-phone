@@ -33,8 +33,8 @@ class RouterMap extends React.Component {
 					<Route path='/ResellOrder' component={ResellOrder}/>
 					<Route path='/SellOrder' component={SellOrder}/>
 					<Route path='/OrderDetail/:orderId' component={OrderDetail}/>
-					<Route path='/ResellConfirmOrder' component={ResellConfirmOrder}/>
-					<Route path='/ResellDetail' component={ResellDetail}/>
+					<Route path='/ResellConfirmOrder/:orderId' component={ResellConfirmOrder}/>
+					<Route path='/ResellDetail/:reSellOrderId' component={ResellDetail}/>
 					<Route path='*' component={NotFound}/>
 				</Route>
 			</Router>

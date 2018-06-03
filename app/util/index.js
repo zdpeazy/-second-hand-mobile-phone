@@ -207,7 +207,13 @@ const toast = (msg) => {
   toastTag.className = 'toast-wrap show';
   setTimeout(function(){
       toastTag.className = 'toast-wrap hide';
-  }, 2000);
+  }, 1000);
+}
+
+const toastModel = (msg) => {
+  document.getElementsByClassName('toast-wrap')[0].getElementsByClassName('toast-msg')[0].innerHTML=msg;
+  var toastTag = document.getElementsByClassName('toast-wrap')[0];
+  toastTag.className = 'toast-wrap show';
 }
 
 export {
@@ -227,5 +233,6 @@ export {
   loadScript,
   selfJsonp,
   createCode,
-  toast
+  toast,
+  toastModel
 }

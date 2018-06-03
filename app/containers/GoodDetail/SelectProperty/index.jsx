@@ -84,7 +84,8 @@ class SelectProperty extends React.Component {
     })
   }
   handleAddNumber(e){
-    let currentNumber = this.state.number + 1;
+    // let currentNumber = this.state.number + 1;
+    let currentNumber = 1;
     this.props.getGoodNumberFn(currentNumber);
     this.setState({
       number: currentNumber
@@ -137,7 +138,7 @@ class SelectProperty extends React.Component {
               <div className="propsList numberBox">
                 <span className={`${this.state.number == 1 ? 'minLow' : ''} decrease icon`} onClick={this.handleDecreaseNumber.bind(this)}></span>
                 <span className="number">{this.state.number}</span>
-                <span className="add icon" onClick={this.handleAddNumber.bind(this)}></span>
+                <span className="add icon minLow" onClick={this.handleAddNumber.bind(this)}></span>
               </div>
             </li>
              </ul>

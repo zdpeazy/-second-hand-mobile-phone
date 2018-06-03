@@ -81,7 +81,7 @@ class LoginForm extends React.Component {
 		this.setState({login_tip: loginTipMsg});
 		// 调用发送验证码接口 //包括六次限制
 		this.setState({counter: this.state.counter + 1})
-		if(this.state.counter + 1 > 0){
+		if(this.state.counter + 1 > 3){
 			this.setState({showImgCaptcha: true});
 			return;
 		} else {

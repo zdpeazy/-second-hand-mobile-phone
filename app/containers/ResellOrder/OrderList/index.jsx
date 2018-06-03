@@ -9,31 +9,61 @@ class OrderList extends React.Component {
 		super(props, context);
 		this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)
 	}
+	gotoReSellDetail(e){
+		let orderId = e.currentTarget.getAttribute('data-orderId');
+		hashHistory.push('/ResellDetail/' + orderId)
+	}
+	judgeStatusDesc(status){
+		let desc = '', descStatus = 0;
+		switch(status){
+			case 0:
+			desc = '待送货上门';
+			descStatus = 0;
+			break;
+			case 1:
+			desc = '待质检';
+			descStatus = 1;
+			break;
+			case 2:
+			desc = '质检完'
+			descStatus = 2;
+			break;
+			default:
+			desc = '交易完成';
+			descStatus = 3;
+			break;
+		}
+		return desc;
+	}
 	componentDidMount() {
 	}
 	render() {
+		console.log(this.props.data)
+		let orderList = this.props.data;
+		// orderList[0].orderInfo.recyclingStatus = 3;
 		return (
 			<ul className="container resellOrderList">
-				<li className="item">
-					<div className="label resellPrice">
-						<span className="price">转售金额：￥500.00</span>
-						<span className="status runing">待送货上门</span>
-					</div>
-					<div className="label time">转售时间：2018-03-07 10:55:33</div>
-					<div className="label orderId">转售订单号：d25sfs33sf0sslfk754dsa22slfk75</div>
-				</li>
-				<li className="item">
-					<div className="label resellPrice">
-						<span className="price">转售金额：￥500.00</span>
-						<span className="status">待送货上门</span>
-					</div>
-					<div className="label time">转售时间：2018-03-07 10:55:33</div>
-					<div className="label orderId">转售订单号：d25sfs33sf0sslfk754dsa22slfk75</div>
-					<div className="label btnBox">
-						<span className="empty"></span>
-						<span className="btn confirm">确认交易</span>
-					</div>
-				</li>
+				{
+					orderList.map((item, index) => {
+						return (
+							<li className="item" key={index} data-orderId={item.orderInfo.orderNo} onClick={this.gotoReSellDetail.bind(this)}>
+								<div className="label resellPrice">
+									<span className="price">转售金额：￥{item.orderInfo.estimatedPrice}</span>
+									<span className={`status ${item.orderInfo.recyclingStatus == 0 ? 'runing' : ''}`}>{this.judgeStatusDesc(item.orderInfo.recyclingStatus)}</span>
+								</div>
+								<div className="label time">转售时间：{item.orderInfo.createTime}</div>
+								<div className="label orderId">转售订单号：{item.orderInfo.orderNo}</div>
+								{
+									item.orderInfo.recyclingStatus == 2 &&
+									<div className="label btnBox">
+										<span className="empty"></span>
+										<span className="btn confirm">确认成交</span>
+									</div>
+								}
+							</li>
+						)
+					})
+				}
 			</ul>
 		);
 	}
