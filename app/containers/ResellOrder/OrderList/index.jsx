@@ -51,7 +51,7 @@ class OrderList extends React.Component {
 									<span className="price">转售金额：￥{item.orderInfo.estimatedPrice}</span>
 									<span className={`status ${item.orderInfo.recyclingStatus == 0 ? 'runing' : ''}`}>{this.judgeStatusDesc(item.orderInfo.recyclingStatus)}</span>
 								</div>
-								<div className="label time">转售时间：{item.orderInfo.createTime}</div>
+								<div className="label time">转售时间：{new Date(item.orderInfo.createTime).format('yyyy-MM-dd h:m:s')}</div>
 								<div className="label orderId">转售订单号：{item.orderInfo.orderNo}</div>
 								{
 									item.orderInfo.recyclingStatus == 2 &&

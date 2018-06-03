@@ -132,7 +132,7 @@ class OrderDetail extends React.Component {
 			      	</li>
 			      	<li className="item">
 			      		<span className="left">数量</span>
-			      		<span className="right">￥{data.needCount}</span>
+			      		<span className="right">{data.needCount}</span>
 			      	</li>
 			      	<li className="item">
 			      		<span className="left">总价</span>
@@ -144,10 +144,6 @@ class OrderDetail extends React.Component {
 			      		<span className="left">付款方式</span>
 			      		<span className="right">{this.judgePayChannel(data.orderInfo.payWay).desc}</span>
 			      	</li>
-			      	<li className="item">
-			      		<span className="left">分期方式</span>
-			      		<span className="right">{this.judgePayChannel(data.orderInfo.payWay).payMethod}</span>
-			      	</li>
 			      </ul>
 			      <ul className="itemBox">
 			      	<li className="item">
@@ -158,7 +154,7 @@ class OrderDetail extends React.Component {
 			      <ul className="itemBox">
 			      	<li className="item">
 			      		<span className="left">购买时间</span>
-			      		<span className="right">{data.orderInfo.createTime}</span>
+			      		<span className="right">{new Date(data.orderInfo.createTime).format('yyyy-MM-dd h:m:s')}</span>
 			      	</li>
 			      </ul>
 			      <ul className="itemBox">

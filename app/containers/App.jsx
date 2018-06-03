@@ -5,7 +5,7 @@ import { hashHistory } from 'react-router';
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 
-import { initRem } from '../util';
+import { initRem, dateFormat } from '../util';
 import Loading from '../components/Loading';
 import judgeAuth from '../util/auth';
 import * as actionsFromOtherFile from '../actions/actions';
@@ -75,6 +75,7 @@ class App extends React.Component {
   }
   componentWillMount() {
     initRem();
+    dateFormat();
     this.shouldShowTab()
     this.shouldShowOrderTab();
     let userInfo = judgeAuth();
