@@ -154,7 +154,7 @@ class OrderDetail extends React.Component {
 			      <ul className="itemBox">
 			      	<li className="item">
 			      		<span className="left">购买时间</span>
-			      		<span className="right">{new Date(data.orderInfo.createTime).format('yyyy-MM-dd h:m:s')}</span>
+			      		<span className="right">{new Date(data.orderInfo.createTime).format('yyyy-MM-dd hh:mm:ss')}</span>
 			      	</li>
 			      </ul>
 			      <ul className="itemBox">

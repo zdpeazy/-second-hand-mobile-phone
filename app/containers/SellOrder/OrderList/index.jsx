@@ -66,13 +66,13 @@ class OrderList extends React.Component {
 		let btnStatus = e.currentTarget.getAttribute('data-btnStatus');
 		let goodId = e.currentTarget.getAttribute('data-goodId');
 		let orderId = e.currentTarget.getAttribute('data-orderId');
-		if(btnStatus * 1 == 1){
+		/*if(btnStatus * 1 == 1){
 			util.toast('请先确认收货');
 			return;
 		} else if(btnStatus * 1 == 2){
 			util.toast('等待商家确认');
 			return;
-		}
+		}*/
 		hashHistory.push('/ResellConfirmOrder/' + orderId);
 	}
 	confirmReceipt(e){
@@ -120,7 +120,7 @@ class OrderList extends React.Component {
 									</div>
 								</div>
 								<div className="timeInfo">
-									<span className="time">{new Date(item.orderInfo.createTime).format('yyyy-MM-dd h:m:s')}</span>
+									<span className="time">{new Date(item.orderInfo.createTime).format('yyyy-MM-dd hh:mm:ss')}</span>
 									<span className="totalPrice">合计：￥{item.orderInfo.totalMoney}</span>
 								</div>
 								<div className="btnBox">

@@ -53,7 +53,8 @@ export function commitGoodOrder(token, goodId, needCount, orderType, resaleOrder
     token: token,
     commodityId: goodId,
     needCount: needCount,
-    orderType: orderType
+    orderType: orderType,
+    orderChannel: 0
   }
   if(resaleOrderFrom){
     commitInfo = Object.assign({}, commitInfo, {
