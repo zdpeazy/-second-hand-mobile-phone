@@ -58,19 +58,27 @@ class ResellConfirmOrder extends React.Component {
     hashHistory.push('/addressList');
   }
   handleSubmit(e){
-    util.toast('正在转售中...');
-    let goodId = e.currentTarget.getAttribute('data-goodId')
-    const commitApi = api.commitGoodOrder(this.props.userInfo.token, goodId, 1, 1, this.props.params.orderId, this.state.addressId);
-    commitApi.then(res => {
-      return res.json();
-    })
-    .then(json => {
-      if(json.code != 0){
-        util.toast(json.msg)
-        return;
-      }
-      hashHistory.replace('/ResellDetail/' + json.data.orderNo);
-    })
+    let isOk = confirm('确认转售');
+    if(isOk){
+      util.toast('正在转售中...');
+      let goodId = e.currentTarget.getAttribute('data-goodId')
+      const commitApi = api.commitGoodOrder(this.props.userInfo.token, goodId, 1, 1, this.props.params.orderId, this.state.addressId);
+      commitApi.then(res => {
+        return res.json();
+      })
+      .then(json => {
+        if(json.code != 0){
+          util.toast(json.msg);
+          return;
+        }
+        setTimeout(function(){
+          hashHistory.replace('/ResellDetail/' + json.data.orderNo);
+        }, 1000)
+      })
+    } else {
+      util.toast('取消转售');
+    }
+    
   }
   componentWillMount(){
     let _this = this, actions = this.props.actionsActive;

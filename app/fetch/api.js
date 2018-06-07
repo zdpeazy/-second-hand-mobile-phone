@@ -117,3 +117,12 @@ export function confirmPickup(token, orderId) {
   })
   return result
 }
+
+// 转售订单确认成交 /api/confirm/deal
+export function confirmDeal(token, orderId) {
+  const result = post('/api/confirm/deal', {
+    token: token,
+    orderNo: orderId
+  })
+  return result
+}

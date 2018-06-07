@@ -9,6 +9,7 @@ import Loading from '../../components/Loading';
 import './style.less';
 
 import * as api from '../../fetch/api';
+import * as util from '../../util/index';
 import * as constants from '../../constants/constants.js';
 
 class ResellDetail extends React.Component {
@@ -57,6 +58,27 @@ class ResellDetail extends React.Component {
       })
     })
   }
+  confirmDeal(e){
+		let isOk = confirm('确认转售');
+		if(isOk){
+			let orderId = e.currentTarget.getAttribute('data-orderId');
+			let confirmDealApi = api.confirmDeal(this.props.userInfo.token, orderId);
+	    confirmDealApi.then(res => {
+	      return res.json();
+	    }).then(json => {
+	      if(json.code != 0){
+	        util.toast(json.msg);
+	        return;
+	      }
+	      util.toast('确认成交！');
+	      setTimeout(function(){
+	      	window.location.reload();
+	      }, 1000)
+	    })
+		} else {
+			util.toast('已取消');
+		}
+	}
   componentWillMount() {
   	let _this = this, actions = this.props.actionsActive;
     actions.getPageTitle({
@@ -77,17 +99,17 @@ class ResellDetail extends React.Component {
 	        <li className="item">
 	        	<div className="label nameStatus">
 	        		<span className="name">{orderInfo.commodity.name + ' ' + orderInfo.commodity.subName}</span>
-	        		<span className="status runing">{this.judgeStatusDesc(orderInfo.order.resaleStatus)}</span>
+	        		<span className={`status ${orderInfo.order.resaleStatus == 0 ? 'runing' : ''}`}>{this.judgeStatusDesc(orderInfo.order.resaleStatus)}</span>
 	        	</div>
-						<div className="label resellPrice">转售金额：￥{orderInfo.order.estimatedPrice}</div>
-						<div className="label time">转售时间：{orderInfo.order.createTime}</div>
+						<div className="label resellPrice">转售金额：￥{orderInfo.order.actualPrice}</div>
+						<div className="label time">转售时间：{new Date(orderInfo.order.createTime).format('yyyy-MM-dd hh:mm:ss')}</div>
 						<div className="label orderId">转售订单号：{orderInfo.order.orderNo}</div>
 						<div className="label btnBox">
 							<span className="empty"></span>
 							<a className="btn confirm" href={`tel:+${constants.SERVICE_PHONE}`}>联系客服</a>
 							{
-								orderInfo.order.recyclingStatus == 2 &&
-								<span className="btn confirm">确认提交</span>
+								orderInfo.order.resaleStatus == 2 &&
+								<span className="btn confirm" data-orderId={orderInfo.order.orderNo} onClick={this.confirmDeal.bind(this)}>确认提交</span>
 							}
 						</div>
 					</li>

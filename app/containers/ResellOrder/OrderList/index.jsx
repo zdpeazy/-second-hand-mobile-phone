@@ -1,6 +1,11 @@
 import React from 'react';
 import {  hashHistory, browserHistory, Link } from 'react-router';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
+
+import * as api from '../../../fetch/api';
+import * as util from '../../../util/index';
 
 import './style.less';
 
@@ -35,29 +40,51 @@ class OrderList extends React.Component {
 		}
 		return desc;
 	}
+	confirmDeal(e){
+		let isOk = confirm('确认转售');
+		if(isOk){
+			let orderId = e.currentTarget.getAttribute('data-orderId');
+			let confirmDealApi = api.confirmDeal(this.props.userInfo.token, orderId);
+	    confirmDealApi.then(res => {
+	      return res.json();
+	    }).then(json => {
+	      if(json.code != 0){
+	        util.toast(json.msg);
+	        return;
+	      }
+	      util.toast('确认成交！');
+	      setTimeout(function(){
+	      	window.location.reload();
+	      }, 1000)
+	    })
+		} else {
+			util.toast('已取消');
+		}
+	}
 	componentDidMount() {
 	}
 	render() {
 		console.log(this.props.data)
 		let orderList = this.props.data;
-		// orderList[0].orderInfo.recyclingStatus = 3;
 		return (
 			<ul className="container resellOrderList">
 				{
 					orderList.map((item, index) => {
 						return (
-							<li className="item" key={index} data-orderId={item.orderInfo.orderNo} onClick={this.gotoReSellDetail.bind(this)}>
-								<div className="label resellPrice">
-									<span className="price">转售金额：￥{item.orderInfo.estimatedPrice}</span>
-									<span className={`status ${item.orderInfo.recyclingStatus == 0 ? 'runing' : ''}`}>{this.judgeStatusDesc(item.orderInfo.recyclingStatus)}</span>
+							<li className="item" key={index}>
+								<div data-orderId={item.orderInfo.orderNo} onClick={this.gotoReSellDetail.bind(this)}>
+									<div className="label resellPrice">
+										<span className="price">转售金额：￥{item.orderInfo.actualPrice}</span>
+										<span className={`status ${item.orderInfo.resaleStatus == 0 ? 'runing' : ''}`}>{this.judgeStatusDesc(item.orderInfo.resaleStatus)}</span>
+									</div>
+									<div className="label time">转售时间：{new Date(item.orderInfo.createTime).format('yyyy-MM-dd hh:mm:ss')}</div>
+									<div className="label orderId">转售订单号：{item.orderInfo.orderNo}</div>
 								</div>
-								<div className="label time">转售时间：{new Date(item.orderInfo.createTime).format('yyyy-MM-dd hh:mm:ss')}</div>
-								<div className="label orderId">转售订单号：{item.orderInfo.orderNo}</div>
 								{
-									item.orderInfo.recyclingStatus == 2 &&
+									item.orderInfo.resaleStatus == 2 &&
 									<div className="label btnBox">
 										<span className="empty"></span>
-										<span className="btn confirm">确认成交</span>
+										<span className="btn confirm" data-orderId={item.orderInfo.orderNo} onClick={this.confirmDeal.bind(this)}>确认成交</span>
 									</div>
 								}
 							</li>
@@ -69,4 +96,16 @@ class OrderList extends React.Component {
 	}
 }
 
-export default OrderList;
+let mapStateToProps = (state)=>{
+  return {
+  	userInfo: state.userInfo
+  }
+}
+let mapDispatchToProps = (dispatch)=>{
+  return {}
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(OrderList)

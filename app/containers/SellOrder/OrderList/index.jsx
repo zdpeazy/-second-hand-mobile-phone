@@ -54,8 +54,13 @@ class OrderList extends React.Component {
 		};
 	}
 	gotoPay(e){
-		let orderId = e.currentTarget.getAttribute('data-orderId');
-		hashHistory.push('/ConfirmOrder/' + orderId);
+		let isOk = confirm('继续支付');
+		if(isOk){
+			let orderId = e.currentTarget.getAttribute('data-orderId');
+			hashHistory.push('/ConfirmOrder/' + orderId);
+		} else {
+			util.toast('已取消');
+		}
 	}
 	gotoOrderDetail(e){
 		let orderId = e.currentTarget.getAttribute('data-orderId');
@@ -66,30 +71,28 @@ class OrderList extends React.Component {
 		let btnStatus = e.currentTarget.getAttribute('data-btnStatus');
 		let goodId = e.currentTarget.getAttribute('data-goodId');
 		let orderId = e.currentTarget.getAttribute('data-orderId');
-		/*if(btnStatus * 1 == 1){
-			util.toast('请先确认收货');
-			return;
-		} else if(btnStatus * 1 == 2){
-			util.toast('等待商家确认');
-			return;
-		}*/
 		hashHistory.push('/ResellConfirmOrder/' + orderId);
 	}
 	confirmReceipt(e){
-		let orderId = e.currentTarget.getAttribute('data-orderId');
-		let confirmReceiptApi = api.confirmPickup(this.props.userInfo.token, orderId);
-		confirmReceiptApi.then(res => {
-			return res.json();
-		}).then(json => {
-			if(json.code != 0){
-        util.toast(json.msg);
-        return;
-      }
-      util.toast('确认收货成功');
-      setTimeout(() => {
-      	window.location.reload();
-      })
-		})
+		let isOk = confirm('确认收货');
+		if(isOk){
+			let orderId = e.currentTarget.getAttribute('data-orderId');
+			let confirmReceiptApi = api.confirmPickup(this.props.userInfo.token, orderId);
+			confirmReceiptApi.then(res => {
+				return res.json();
+			}).then(json => {
+				if(json.code != 0){
+	        util.toast(json.msg);
+	        return;
+	      }
+	      util.toast('确认收货成功');
+	      setTimeout(() => {
+	      	window.location.reload();
+	      })
+			})
+		} else {
+			util.toast('取消收货');
+		}
 	}
 	componentDidMount() {
 	}
