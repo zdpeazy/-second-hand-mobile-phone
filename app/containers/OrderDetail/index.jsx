@@ -23,32 +23,31 @@ class OrderDetail extends React.Component {
 	}
 	judgeStatus(payStatus, status){
 		let statusDesc = '', statusClassName = '', btnStaus = 0;
-		console.log(payStatus)
-		if(payStatus && payStatus * 1 == 2){
-			switch(status) {
-				case 0:
-				statusDesc = '待提货';
-				statusClassName = 'status';
-				btnStaus = 1;//0 是未支付状态 1 支付完成待提货  2 已完成展示
-				break;
-				case 1:
-				statusDesc = '已提货';
-				btnStaus = 2;
-				break;
-				case 3:
-				case 4:
-				statusDesc = '已完成';
-				btnStaus = 4;
-				break;
-				default:
-				statusDesc = '已完成';
-				btnStaus = 2;
-				break;
-			}
-		} else {
-			statusDesc = '未支付';
+		switch(status) {
+			case 0:
+			statusDesc = '待付款';
 			statusClassName = 'status';
-			btnStaus = 0;
+			btnStaus = 0;//0 是未支付状态 1 支付完成待提货  2 已完成展示
+			break;
+			case 1:
+			statusDesc = '已关闭';
+			btnStaus = 1;// 商家取消订单已关闭
+			break;
+			case 2:
+			statusDesc = '待发货';
+			btnStaus = 2;
+			break;
+			case 3:
+			statusDesc = '待收货';
+			btnStaus = 3;
+			case 4:
+			statusDesc = '待收货';
+			btnStaus = 3;
+			break;
+			default:
+			statusDesc = '已完成';
+			btnStaus = 5;
+			break;
 		}
 		return {
 			desc: statusDesc,
@@ -82,7 +81,7 @@ class OrderDetail extends React.Component {
 		};
 	}
 	getOrderDetail(){
-		let orderDetailApi = api.payDetail(this.props.userInfo.token, this.props.params.orderId);
+		let orderDetailApi = api.orderDetail(this.props.userInfo.token, this.props.params.orderId);
 		orderDetailApi.then(res => {
 			return res.json();
 		}).then(json => {
@@ -105,22 +104,22 @@ class OrderDetail extends React.Component {
         {
         	data ?
         	<div>
-        		<div className="status">{this.judgeStatus(data.orderInfo.payStatus, data.orderInfo.orderStatus).desc}
+        		<div className="status">{this.judgeStatus(data.orderInfo.saleStatus).desc}
 		        </div>
 		        <div className="addressBox">
-			        <h3>提货地址</h3>
+			        <h3>收货地址</h3>
 			        <div className="selectAddress">
 			          <i className="address-icon"></i>
 			          <div className="addressInfo">
-			            <span className="txt">{data.selfAddressInfo.address}</span>
-			            <span className="phone">{data.selfAddressInfo.phone}</span>
+			            <span className="txt">{data.addrInfo.receiveAddress + '' + data.addrInfo.receiveDetailAddress}</span>
+			            <span className="phone">{data.addrInfo.receivePhone}</span>
 			          </div>
 			        </div>
 			      </div>
 			      <ul className="itemBox">
 			      	<li className="item">
 			      		<span className="left">提货方式</span>
-			      		<span className="right">自提</span>
+			      		<span className="right">快递</span>
 			      	</li>
 			      	<li className="item">
 			      		<span className="left">商品名称</span>
@@ -132,7 +131,7 @@ class OrderDetail extends React.Component {
 			      	</li>
 			      	<li className="item">
 			      		<span className="left">数量</span>
-			      		<span className="right">{data.needCount}</span>
+			      		<span className="right">×{data.needCount}</span>
 			      	</li>
 			      	<li className="item">
 			      		<span className="left">总价</span>

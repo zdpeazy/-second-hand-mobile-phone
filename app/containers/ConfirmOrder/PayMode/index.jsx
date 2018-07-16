@@ -53,11 +53,6 @@ class PayMode extends React.Component {
             <span className="desc">支付宝</span>
             <span className={`select ${this.state.channel == 1 ? 'selected' : ''}`}></span>
           </li>
-          <li className="item che" data-channel='2' onClick={this.selectPayMode.bind(this)}>
-            <i className="icon"></i>
-            <span className="desc">橙子分期</span>
-            <span className={`select ${this.state.channel == 2 ? 'selected' : ''}`}></span>
-          </li>
         </ul>
       </div>
     )
@@ -79,3 +74,9 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(PayMode)
+
+/*<li className="item che" data-channel='2' onClick={this.selectPayMode.bind(this)}>
+  <i className="icon"></i>
+  <span className="desc">橙子分期</span>
+  <span className={`select ${this.state.channel == 2 ? 'selected' : ''}`}></span>
+</li>*/

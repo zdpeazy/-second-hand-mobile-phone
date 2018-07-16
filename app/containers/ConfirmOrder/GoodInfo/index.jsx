@@ -37,21 +37,21 @@ class GoodInfo extends React.Component {
       <div className="infoBox">
         <div className="info">
           <div className="infoLeft">
-            <img src={infoData.commodity.image}/>
+            <img src={infoData.image}/>
           </div>
           <div className="infoRight">
-            <span className="props">{infoData.commodity.name + ' ' + infoData.commodity.subName}</span>
-            <span className="price">￥{infoData.commodity.unitPrice}</span>
-            <span className="number">×{infoData.order.needCount}</span>
+            <span className="props">{infoData.name + ' ' + infoData.subName}</span>
+            <span className="price">￥{infoData.unitPrice}</span>
+            <span className="number">×{infoData.needCount}</span>
           </div>
         </div>
         {
-          infoData.order.gifts &&
+          infoData.gifts &&
           <div className="active">
             <div className="activeLeft">
               <span className="tip active1">赠</span>
             </div>
-            <div className="activeRight">{infoData.order.gifts}</div>
+            <div className="activeRight">{infoData.gifts}</div>
           </div>
         }
       </div>

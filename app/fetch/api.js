@@ -48,19 +48,18 @@ export function getGoodProperty(token) {
 
 // 确认订单
 // orderType 1 转售订单  0 销售订单
-export function commitGoodOrder(token, goodId, needCount, orderType, resaleOrderFrom, addressId) {
+export function commitGoodOrder(token, goodId, needCount, orderType, resaleOrderFrom) {
   let commitInfo = {
     token: token,
     commodityId: goodId,
     needCount: needCount,
     orderType: orderType,
-    orderChannel: 0
+    orderChannel: 1
   }
   if(resaleOrderFrom){
     commitInfo = Object.assign({}, commitInfo, {
       resaleOrderFrom: resaleOrderFrom,
-      pickUpWay: 0,
-      addressId: addressId
+      pickUpWay: 0
     })
   }
   const result = post('/api/commodity/commit', commitInfo)
@@ -76,10 +75,31 @@ export function orderDetail(token, orderId) {
   return result
 }
 
-// 销售订单地址列表
+// 销售订单地址列表（自提地址已废弃）
 export function adressList(token) {
   const result = get('/api/shop/receiver', {
     token: token
+  })
+  return result
+}
+// 用户地址查询
+export function userAddress(token){
+  const result = get('/api/address/list', {
+    token: token
+  })
+  return result
+}
+// 用户添加地址/api/address/add
+export function addAddress(addressInfo){
+  const result = post('/api/address/add', addressInfo)
+  return result
+}
+
+// 用户删除地址/api/address/add
+export function delAddress(token, userAddrId){
+  const result = post('/api/address/del', {
+    token: token,
+    userAddrId: userAddrId
   })
   return result
 }
@@ -108,10 +128,28 @@ export function payDetail(token, orderId) {
   return result
 }
 
-// 确认收货/api/order/userConfirmPickup
+// 请求发货/api/order/userAskDelivery
+export function askDelivery(token, orderId) {
+  const result = post('/api/order/userAskDelivery', {
+    token: token,
+    orderNo: orderId
+  })
+  return result
+}
 
-export function confirmPickup(token, orderId) {
+// 确认收货/api/order/userConfirmPickup---(已废弃)
+
+export function oldc_onfirmPickup(token, orderId) {
   const result = post('/api/order/userConfirmPickup', {
+    token: token,
+    orderNo: orderId
+  })
+  return result
+}
+
+// 新确认收货（成交）接口
+export function confirmPickup(token, orderId) {
+  const result = post('/api/confirm/deal', {
     token: token,
     orderNo: orderId
   })

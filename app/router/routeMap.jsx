@@ -10,9 +10,11 @@ import AddressList from '../containers/AddressList';
 import payDetail from '../containers/payDetail';
 import ResellOrder from '../containers/ResellOrder';
 import SellOrder from '../containers/SellOrder';
+import Logistics from '../containers/Logistics';
 import OrderDetail from '../containers/OrderDetail';
 import ResellConfirmOrder from '../containers/ResellConfirmOrder';
 import ResellDetail from '../containers/ResellDetail';
+import MyAddress from '../containers/MyAddress';
 import NotFound from '../containers/NotFound';
 
 class RouterMap extends React.Component {
@@ -26,12 +28,14 @@ class RouterMap extends React.Component {
 					<IndexRoute component={Login}/>
 					<Route path='/Login' component={Login}/>
 					<Route path='/GoodList' component={GoodList}/>
+					<Route path='/MyAddress' component={MyAddress}/>
 					<Route path='/GoodDetail/:goodId' component={GoodDetail}/>
 					<Route path='/ConfirmOrder/:orderId' component={ConfirmOrder}/>
 					<Route path='/AddressList' component={AddressList}/>
 					<Route path='/payDetail' component={payDetail}/>
 					<Route path='/ResellOrder' component={ResellOrder}/>
 					<Route path='/SellOrder' component={SellOrder}/>
+					<Route path='/Logistics/:orderId' component={Logistics}/>
 					<Route path='/OrderDetail/:orderId' component={OrderDetail}/>
 					<Route path='/ResellConfirmOrder/:orderId' component={ResellConfirmOrder}/>
 					<Route path='/ResellDetail/:reSellOrderId' component={ResellDetail}/>

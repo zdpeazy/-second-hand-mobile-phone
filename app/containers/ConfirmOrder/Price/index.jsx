@@ -14,7 +14,7 @@ class Price extends React.Component {
       <ul className="priceBox">
         <li className="price">
           <span className="label">商品金额</span>
-          <span className="number">￥{this.props.data.order.totalMoney}</span>
+          <span className="number">￥{this.props.data.orderInfo.totalMoney}</span>
         </li>
         {/*<li className="freight">
           <span className="label">运费</span>

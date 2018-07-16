@@ -17,12 +17,16 @@ class Submit extends React.Component {
       util.toast('暂时未开通此支付方式');
       return;
     }
+    if(this.props.data.addressId == ''){
+      util.toast('请添加收货地址');
+      return;
+    }
     let commitParams = Object.assign(this.props.data, {
       token: this.props.token,
       orderNo: this.props.orderId,
       orderType: 0,
       isAgree: 1,
-      totalMoney: this.props.orderInfo.order.totalMoney
+      totalMoney: this.props.orderInfo.orderInfo.totalMoney
     })
     let orderPayApi = api.orderPay(commitParams);
     orderPayApi.then(res => {
@@ -32,7 +36,7 @@ class Submit extends React.Component {
         util.toast(json.msg);
         return;
       }
-      window.location.href = json.data.qrCodeStr;
+      // window.location.href = json.data.qrCodeStr;
     })
     //util.toast('支付暂未开通' + ' 支付参数：' + JSON.stringify(commitParams));
   }

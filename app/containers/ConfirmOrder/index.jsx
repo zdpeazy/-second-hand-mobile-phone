@@ -27,7 +27,8 @@ class ConfirmOrder extends React.Component {
 			title: '确认订单',
       confirmGoodInfo: null,
       addressInfo: [],
-      addressId: 0,
+      userAddressId: 0, // 用户选择当前地址的id
+      selectId: 0, // 用户选择当前地址列表的下表
       payChannel: this.props.payModelInfo.payModel ? this.props.payModelInfo.payModel : 0,
       commitInfo: null
 		}
@@ -43,7 +44,8 @@ class ConfirmOrder extends React.Component {
         util.toast(json.msg);
         return;
       }
-      if(json.data.order.payStatus * 1 == 2){
+      console.log(json.data)
+      if(json.data.orderInfo.payStatus * 1 == 2){
         util.toast('支付成功');
         jumpTimer = setTimeout(() => {
           hashHistory.replace('/SellOrder');
@@ -60,8 +62,8 @@ class ConfirmOrder extends React.Component {
       this.getOrderDetail();
     }, 3000)
   }
-  // 获取提货地址信息
-  getAdressList(cb){
+  // 获取自提-提货地址信息
+  /*getAdressList(cb){
     const adressListApi = api.adressList(this.props.userInfo.token);
     adressListApi.then(res => {
       return res.json();
@@ -75,6 +77,22 @@ class ConfirmOrder extends React.Component {
       })
       return cb(json.data)
     })
+  }*/
+  // 获取用户地址
+  getUserAddress(cb){
+    const userAddressApi = api.userAddress(this.props.userInfo.token);
+    userAddressApi.then(res => {
+      return res.json();
+    }).then(json => {
+      if(json.code != 0){
+        util.toast(json.msg)
+        return;
+      }
+      this.setState({
+        addressInfo: json.data
+      })
+      return cb(json.data);
+    })
   }
   setPayChannel(value){
     let actions = this.props.actionsActive;
@@ -82,7 +100,7 @@ class ConfirmOrder extends React.Component {
       payChannel: value,
       commitInfo: {
         payWay: parseInt(value) + 1,
-        addressId: this.state.commitInfo.addressId
+        userAddressId: this.state.commitInfo.userAddressId
       }
     })
   }
@@ -98,32 +116,35 @@ class ConfirmOrder extends React.Component {
   }
   // 将页面标题文案 存储到Redux中
   componentDidMount() {
-    let _this = this, addressId = '';
-    let addressNo = this.props.selectAddressInfo.selectId ? this.props.selectAddressInfo.selectId : 0;
-    this.getAdressList(function(data){
-      addressId = data[addressNo].id;
+    let _this = this, userAddressId = '';
+    let userSelectId = this.props.selectAddressInfo.selectId ? this.props.selectAddressInfo.selectId : 0;
+    this.getUserAddress(function(data){
+      if(data.length > 0){
+        userAddressId = data[userSelectId].id;
+      }
       _this.setState({
         commitInfo: {
           payWay: parseInt(_this.state.payChannel) + 1,
-          addressId: addressId
-        }
+          userAddressId: userAddressId
+        },
+        selectId: userSelectId
       })
     })
   }
 	render() {
     let orderInfo = this.state.confirmGoodInfo;
-    let selectId = this.props.selectAddressInfo.selectId ? this.props.selectAddressInfo.selectId : this.state.addressId
-    let selectAdress = this.state.addressInfo[selectId];
+    let userAddressInfo = this.state.addressInfo[this.state.selectId];
+    {/*let selectId = this.props.selectAddressInfo.selectId ? this.props.selectAddressInfo.selectId : this.state.addressId
+    let selectAdress = this.state.addressInfo[selectId];*/}
 		return (
 			<div className="container confirmOrder" style={{background: '#f2f2f2'}}>
           {
-            orderInfo && selectAdress && this.state.commitInfo ?
+            orderInfo && this.state.commitInfo ?
             <div>
               <GoodInfo data={orderInfo}/>
               <PayMode checkPayFn={this.setPayChannel.bind(this)}/>
-              <Address data={selectAdress}/>
+              <Address data={userAddressInfo}/>
               <Price data={orderInfo}/>
-              <Rule/>
               <Submit
                 data={this.state.commitInfo}
                 orderId={this.props.params.orderId}

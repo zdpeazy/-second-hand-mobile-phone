@@ -10,7 +10,7 @@ class Address extends React.Component {
     this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
   }
   gotoAddressList(){
-    hashHistory.push('/addressList');
+    hashHistory.push('/MyAddress');
   }
   componentDidMount(){
   }
@@ -20,13 +20,17 @@ class Address extends React.Component {
     let selectAddress = this.props.data;
     return (
       <div className="addressBox" onClick={this.gotoAddressList.bind(this)}>
-        <h3>提货地址</h3>
+        <h3>收货地址</h3>
         <div className="selectAddress">
           <i className="address-icon"></i>
-          <div className="addressInfo">
-            <span className="txt">{selectAddress.receiveAddress}</span>
-            <span className="phone">{selectAddress.receivePhone}</span>
-          </div>
+          {
+            selectAddress ?
+            <div className="addressInfo">
+              <span className="txt">{selectAddress.receiveAddress + ' ' + selectAddress.receiveDetailAddress}</span>
+              <span className="phone">{selectAddress.receivePhone}</span>
+            </div> :
+            <div className="addressInfo">请输入收货地址</div>
+          }
         </div>
       </div>
     )

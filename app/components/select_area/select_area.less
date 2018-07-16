@@ -1,0 +1,88 @@
+#select-area {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 1003;
+  display: none;
+  transition: all 1s linear;
+  &.selectAreaBoxShow{
+    display: block;
+  }
+  &.selectAreaBoxHide{
+    display: none;
+    transition: all 1s linear;
+  }
+  .select-area {
+    width: 100%;
+    height: auto;
+    line-height: 36px;
+    position: absolute;
+    bottom: 0;
+    background-color: #fff;
+    font-size: 0.3rem;
+    .list {
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 60px #fff inset;
+      &:before,
+      &:after {
+        display: block;
+        width: 100%;
+        height: 1px;
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: auto;
+        right: auto;
+        background-color: #e7e8e8;
+      }
+      &:before {
+        top: 60px;
+      }
+      &:after {
+        bottom: 60px;
+      }
+    }
+    .ul-area {
+      width: 33.3%;
+      height: 155px;
+      overflow-y: scroll;
+      float: left;
+      &:last-child{
+        text-align: right;
+      }
+    }
+    li {
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      color: #ddd;
+      &.selected {
+        color: #000;
+      }
+    }
+  }
+  .border-bottom-grey{
+    display: flex;
+    padding: 0.1rem 0;
+    color: #666666;
+    border-bottom: 1px solid #e7e8e8;
+    .emptyBox{
+      flex: 1;
+    }
+    .confirm, .cancel{
+      width: 1.5rem;
+      height: 100%;
+      text-align: center;
+    }
+    .confirm{
+      color: #76d459;
+    }
+  }
+}

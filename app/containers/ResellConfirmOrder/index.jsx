@@ -116,22 +116,22 @@ class ResellConfirmOrder extends React.Component {
             </div>
             <div className="goodInfo">
               <h3 className="title">宝贝信息</h3>
-              <div className="name">{orderInfo.commodity.name + ' ' + orderInfo.commodity.subName}</div>
+              <div className="name">{orderInfo.name + ' ' + orderInfo.subName}</div>
               <div className="info">
-                <span>{orderInfo.commodity.newLevel}</span>
-                <span>{orderInfo.commodity.color}</span>
-                <span>存储容量 {orderInfo.commodity.capacity}</span>
-                <span>{orderInfo.commodity.channel}</span>
+                <span>{orderInfo.newLevel}</span>
+                <span>{orderInfo.color}</span>
+                <span>存储容量 {orderInfo.capacity}</span>
+                <span>{orderInfo.channel}</span>
               </div>
             </div>
             <div className="estimatePrice">
               <h3 className="title">宝贝预估价格</h3>
               <div className="info">
                 <span className="txt">手机预估价格为</span>
-                <span className="price">￥{orderInfo.order.estimatedPrice}</span>
+                <span className="price">￥{orderInfo.unitPrice}</span>
               </div>
             </div>
-            <div className="addressBox" onClick={this.gotoAddressList.bind(this)}>
+            {/*<div className="addressBox" onClick={this.gotoAddressList.bind(this)}>
               <h3>送货地址</h3>
               <div className="selectAddress">
                 <i className="address-icon"></i>
@@ -140,9 +140,9 @@ class ResellConfirmOrder extends React.Component {
                   <span className="phone">{selectAdress.receivePhone}</span>
                 </div>
               </div>
-            </div>
+            </div>*/}
             <div className="submitBox">
-              <button data-goodId={orderInfo.order.commodityId} onClick={this.handleSubmit.bind(this)}>确认下单</button>
+              <button data-goodId={orderInfo.orderInfo.commodityId} onClick={this.handleSubmit.bind(this)}>确认下单</button>
             </div>
           </div>
           : <Loading/>

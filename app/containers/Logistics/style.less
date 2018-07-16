@@ -1,0 +1,83 @@
+.logistics{
+	background: #fff;
+	.serviceIcon{
+		position: fixed;
+		top: 0.2rem;
+		right: 0.3rem;
+		z-index: 1001;
+		display: inline-block;
+		width: 0.4rem;
+		height: 0.43rem;
+		background: url('../../static/img/serviceIcon.png') no-repeat;
+		background-size: 100% 100%;
+	}
+	.logisticsList{
+		.item{
+			display: flex;
+			font-size: 0.24rem;
+			color: #999999;
+			overflow: hidden;
+			.left{
+				width: 1.06rem;
+				position: relative;
+				.circleIcon{
+					display: inline-block;
+					width: 0.12rem;
+					height: 0.12rem;
+					background: #999999;
+					border-radius: 50%;
+					position: absolute;
+					left: 50%;
+					top: 0.4rem;
+					margin-left: -0.06rem;
+				}
+				&:before{
+					content: '';
+					display: block;
+					width: 1px;
+					height: 100%;
+					background: #999999;
+					position: absolute;
+					top: 0;
+					left: 50%;
+					z-index: 1;
+				}
+			}
+			.right{
+				flex: 1;
+				border-bottom: 1px solid #eeeeee;
+				padding: 0.3rem 0.3rem 0.3rem 0;
+				line-height: 0.36rem;
+				span{
+					display: block;
+					&:first-child{
+						margin-bottom: 0.1rem;
+					}
+				}
+			}
+			&:first-child{
+				color: #000;
+				.left{
+					.circleIcon{
+						width: 0.44rem;
+						height: 0.44rem;
+						background: url('../../static/img/logistics.png') no-repeat;
+						background-size: 100% 100%;
+						top: 0.33rem;
+						margin-left: -0.22rem;
+						z-index: 2;
+					}
+					&:before{
+						top: 0.77rem;
+					}
+				}
+			}
+			&:last-child{
+				.left:before{
+					height: 0.44rem;
+					top: 0;
+				}
+			}
+		}
+	}
+}

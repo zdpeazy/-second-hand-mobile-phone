@@ -22,23 +22,28 @@ class OrderList extends React.Component {
 		let desc = '', descStatus = 0;
 		switch(status){
 			case 0:
-			desc = '待送货上门';
+			desc = '待质检';
 			descStatus = 0;
 			break;
 			case 1:
-			desc = '待质检';
+			desc = '质检完';
 			descStatus = 1;
 			break;
 			case 2:
-			desc = '质检完'
+			desc = '已关闭'
 			descStatus = 2;
 			break;
 			default:
-			desc = '交易完成';
+			desc = '已完成';
 			descStatus = 3;
 			break;
 		}
 		return desc;
+	}
+	// 查看物流接口
+	lookLogistics(e){
+		let orderId = e.currentTarget.getAttribute('data-orderId');
+		hashHistory.push('/Logistics/' + orderId);
 	}
 	confirmDeal(e){
 		let isOk = confirm('确认转售');
@@ -81,10 +86,17 @@ class OrderList extends React.Component {
 									<div className="label orderId">转售订单号：{item.orderInfo.orderNo}</div>
 								</div>
 								{
-									item.orderInfo.resaleStatus == 2 &&
+									item.orderInfo.resaleStatus == 1 &&
 									<div className="label btnBox">
 										<span className="empty"></span>
 										<span className="btn confirm" data-orderId={item.orderInfo.orderNo} onClick={this.confirmDeal.bind(this)}>确认成交</span>
+									</div>
+								}
+								{
+									item.orderInfo.resaleStatus == 3 &&
+									<div className="label btnBox">
+										<span className="empty"></span>
+										<span className="btn confirm" data-orderId={item.orderInfo.orderNo} onClick={this.lookLogistics.bind(this)}>查看物流</span>
 									</div>
 								}
 							</li>
