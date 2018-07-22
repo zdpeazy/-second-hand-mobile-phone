@@ -54,7 +54,7 @@ export function commitGoodOrder(token, goodId, needCount, orderType, resaleOrder
     commodityId: goodId,
     needCount: needCount,
     orderType: orderType,
-    orderChannel: 1
+    orderChannel: 0
   }
   if(resaleOrderFrom){
     commitInfo = Object.assign({}, commitInfo, {
@@ -159,6 +159,14 @@ export function confirmPickup(token, orderId) {
 // 转售订单确认成交 /api/confirm/deal
 export function confirmDeal(token, orderId) {
   const result = post('/api/confirm/deal', {
+    token: token,
+    orderNo: orderId
+  })
+  return result
+}
+// 查询物流信息
+export function logisticsQuery(token, orderId) {
+  const result = post('/api/shipment/query', {
     token: token,
     orderNo: orderId
   })

@@ -89,6 +89,7 @@ class OrderDetail extends React.Component {
         util.toast(json.msg);
         return;
       }
+      // delete json.data.addrInfo
       this.setState({
       	orderInfo: json.data
       })
@@ -106,16 +107,19 @@ class OrderDetail extends React.Component {
         	<div>
         		<div className="status">{this.judgeStatus(data.orderInfo.saleStatus).desc}
 		        </div>
-		        <div className="addressBox">
-			        <h3>收货地址</h3>
-			        <div className="selectAddress">
-			          <i className="address-icon"></i>
-			          <div className="addressInfo">
-			            <span className="txt">{data.addrInfo.receiveAddress + '' + data.addrInfo.receiveDetailAddress}</span>
-			            <span className="phone">{data.addrInfo.receivePhone}</span>
-			          </div>
-			        </div>
-			      </div>
+		        {
+		        	data.addrInfo &&
+		        	<div className="addressBox">
+				        <h3>收货地址</h3>
+				        <div className="selectAddress">
+				          <i className="address-icon"></i>
+				          <div className="addressInfo">
+				            <span className="txt">{data.addrInfo.receiveAddress + '' + data.addrInfo.receiveDetailAddress}</span>
+				            <span className="phone">{data.addrInfo.receivePhone}</span>
+				          </div>
+				        </div>
+				      </div>
+		        }
 			      <ul className="itemBox">
 			      	<li className="item">
 			      		<span className="left">提货方式</span>

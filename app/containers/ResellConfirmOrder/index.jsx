@@ -131,7 +131,7 @@ class ResellConfirmOrder extends React.Component {
                 <span className="price">￥{orderInfo.unitPrice}</span>
               </div>
             </div>
-            {/*<div className="addressBox" onClick={this.gotoAddressList.bind(this)}>
+            <div className="addressBox" onClick={this.gotoAddressList.bind(this)}>
               <h3>送货地址</h3>
               <div className="selectAddress">
                 <i className="address-icon"></i>
@@ -140,7 +140,7 @@ class ResellConfirmOrder extends React.Component {
                   <span className="phone">{selectAdress.receivePhone}</span>
                 </div>
               </div>
-            </div>*/}
+            </div>
             <div className="submitBox">
               <button data-goodId={orderInfo.orderInfo.commodityId} onClick={this.handleSubmit.bind(this)}>确认下单</button>
             </div>

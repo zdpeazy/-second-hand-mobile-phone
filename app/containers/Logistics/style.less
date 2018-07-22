@@ -55,7 +55,22 @@
 					}
 				}
 			}
-			&:first-child{
+			&.normalItem:first-child{
+				.left{
+					&:after{
+						content: '';
+						display: block;
+						width: 3px;
+						height: 0.39rem;
+						background: #fff;
+						position: absolute;
+						top: 0;
+						left: 50%;
+						z-index: 1;
+					}
+				}
+			}
+			&.successItem{
 				color: #000;
 				.left{
 					.circleIcon{

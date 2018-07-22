@@ -17,7 +17,8 @@ class Logistics extends React.Component {
 		super(props, context);
 		this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this)
 		this.state = {
-			title: '物流详情'
+			title: '物流详情',
+			logisticsData: {}
 		}
 	}
   componentWillMount() {
@@ -25,51 +26,67 @@ class Logistics extends React.Component {
     actions.getPageTitle({
       title: _this.state.title
     })
+    this.getLogistics();
   }
+  getLogistics(){
+  	let _this = this;
+		let logisticsQueryApi = api.logisticsQuery(this.props.userInfo.token, this.props.params.orderId);
+		logisticsQueryApi.then(res => {
+			return res.json();
+		}).then(json => {
+			if(json.code != 0){
+        util.toast(json.msg);
+        return;
+      }
+      let logisticsData = JSON.parse(json.data);
+      _this.setState({
+      	logisticsData: logisticsData
+      })
+     	// console.log(logisticsData)
+		})
+	}
   componentDidMount() {
   }
   componentWillUnmount() {
   }
 	render() {
+		let logisticsData = this.state.logisticsData;
+		let logisticsList = logisticsData && logisticsData.data;
 		return (
 			<div className="container logistics">
 				<ul className="logisticsList">
-					<li className="item">
-						<div className="left">
-							<span className="circleIcon"></span>
-						</div>
-						<div className="right">
-							<span>已签收，签收人是本人</span>
-							<span>2018-04-21  09:14:18</span>
-						</div>
-					</li>
-					<li className="item">
-						<div className="left">
-							<span className="circleIcon"></span>
-						</div>
-						<div className="right">
-							<span>您的订单已交由【申通快递】承运，物流编号25331458500559</span>
-							<span>2018-04-21  09:14:18</span>
-						</div>
-					</li>
-					<li className="item">
-						<div className="left">
-							<span className="circleIcon"></span>
-						</div>
-						<div className="right">
-							<span>【北京市】【回龙观分公司】您的订单正在派送途中，派件员：周龙，电话：18011112222，感谢您的耐心等待。</span>
-							<span>2018-04-21  09:14:18</span>
-						</div>
-					</li>
-					<li className="item">
-						<div className="left">
-							<span className="circleIcon"></span>
-						</div>
-						<div className="right">
-							<span>您提交了订单，准备出库中</span>
-							<span>2018-04-21  09:14:18</span>
-						</div>
-					</li>
+					{
+						(logisticsData.state == '0' || logisticsData.state == '3') &&
+						logisticsList.map((item, index) => {
+							return (
+								<li key={index} className={logisticsData.state == '3' && index == '0' ? 'item successItem' : 'item normalItem'}>
+									<div className="left">
+										<span className="circleIcon"></span>
+									</div>
+									<div className="right">
+										<span>{item.context}</span>
+										<span>{item.ftime}</span>
+									</div>
+								</li>
+							)
+						})
+					}
+					{
+						logisticsData.state == '1' &&
+						logisticsList.map((item, index) => {
+							return (
+								<li key={index} className="item normalItem">
+									<div className="left">
+										<span className="circleIcon"></span>
+									</div>
+									<div className="right">
+										<span>{item.context}</span>
+										<span>{item.ftime}</span>
+									</div>
+								</li>
+							)
+						})
+					}
 				</ul>
 				<a className="serviceIcon" href={`tel:+${constants.SERVICE_PHONE}`}></a>
       </div>
