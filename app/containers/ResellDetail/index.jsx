@@ -104,7 +104,7 @@ class ResellDetail extends React.Component {
 	        		<span className="name">{orderInfo.name + ' ' + orderInfo.subName}</span>
 	        		<span className={`status ${orderInfo.orderInfo.resaleStatus == 0 ? 'runing' : ''}`}>{this.judgeStatusDesc(orderInfo.orderInfo.resaleStatus)}</span>
 	        	</div>
-						<div className="label resellPrice">转售金额：￥{orderInfo.orderInfo.actualPrice}</div>
+						<div className="label resellPrice">转售金额：￥{orderInfo.orderInfo.totalMoney}</div>
 						<div className="label time">转售时间：{new Date(orderInfo.orderInfo.createTime).format('yyyy-MM-dd hh:mm:ss')}</div>
 						<div className="label orderId">转售订单号：{orderInfo.orderInfo.orderNo}</div>
 						<div className="label btnBox">

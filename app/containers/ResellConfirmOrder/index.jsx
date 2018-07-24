@@ -128,7 +128,7 @@ class ResellConfirmOrder extends React.Component {
               <h3 className="title">宝贝预估价格</h3>
               <div className="info">
                 <span className="txt">手机预估价格为</span>
-                <span className="price">￥{orderInfo.unitPrice}</span>
+                <span className="price">￥{orderInfo.orderInfo.totalMoney}</span>
               </div>
             </div>
             <div className="addressBox" onClick={this.gotoAddressList.bind(this)}>

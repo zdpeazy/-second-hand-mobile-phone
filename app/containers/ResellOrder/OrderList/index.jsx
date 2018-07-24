@@ -79,7 +79,7 @@ class OrderList extends React.Component {
 							<li className="item" key={index}>
 								<div data-orderId={item.orderInfo.orderNo} onClick={this.gotoReSellDetail.bind(this)}>
 									<div className="label resellPrice">
-										<span className="price">转售金额：￥{item.orderInfo.actualPrice}</span>
+										<span className="price">转售金额：￥{item.orderInfo.totalMoney}</span>
 										<span className={`status ${item.orderInfo.resaleStatus == 0 ? 'runing' : ''}`}>{this.judgeStatusDesc(item.orderInfo.resaleStatus)}</span>
 									</div>
 									<div className="label time">转售时间：{new Date(item.orderInfo.createTime).format('yyyy-MM-dd hh:mm:ss')}</div>
