@@ -8,4 +8,4 @@ export const PAGE_TITLE = 'PAGE_TITLE';
 export const PLAN_GOODINFO = 'PLAN_GOODINFO';
 export const SELECT_ADRESS = 'SELECT_ADRESS';
 export const PAY_MODEL = 'PAY_MODEL';
-export const SERVICE_PHONE = '10086';
+export const SERVICE_PHONE = '01086488166';

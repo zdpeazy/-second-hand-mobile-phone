@@ -153,30 +153,33 @@ class OrderList extends React.Component {
 									<span className="time">{new Date(item.orderInfo.createTime).format('yyyy-MM-dd hh:mm:ss')}</span>
 									<span className="totalPrice">合计：￥{item.orderInfo.totalMoney}</span>
 								</div>
-								<div className="btnBox">
-									<div className="emptyDiv"></div>
-									{
-										this.judgeStatus(item.orderInfo.saleStatus).btnStaus == 0 &&
-										<div className="btnRight"  data-orderId={item.orderInfo.orderNo}  onClick={this.gotoPay.bind(this)}>
-											<span className="noPay">立即支付</span>
-										</div>
-									}
-									{
-										this.judgeStatus(item.orderInfo.saleStatus).btnStaus == 2 &&
-										<div className="btnRight"  data-orderId={item.orderInfo.orderNo}>
-											<span className="receiving" data-orderId={item.orderInfo.orderNo} onClick={this.pleaseDelivery.bind(this)}>请求发货</span>
-											<span className="resell" data-btnStatus={this.judgeStatus(item.orderInfo.payStatus, item.orderInfo.orderStatus).btnStaus} data-orderId={item.orderInfo.orderNo} onClick={this.reSellBtn.bind(this)}>卖了赚钱</span>
-										</div>
-									}
-									{
-										this.judgeStatus(item.orderInfo.saleStatus).btnStaus == 3 &&
-										<div className="btnRight"  data-orderId={item.orderInfo.orderNo}>
-											<a className="servicePhone" href={`tel:+${constants.SERVICE_PHONE}`}>售后</a>
-											<span className="logistics" data-orderId={item.orderInfo.orderNo} onClick={this.lookLogistics.bind(this)}>查看物流</span>
-											<span className="receiving" data-orderId={item.orderInfo.orderNo} onClick={this.confirmReceipt.bind(this)}>确认收货</span>
-										</div>
-									}
-								</div>
+								{
+									(this.judgeStatus(item.orderInfo.saleStatus).btnStaus == 0 || this.judgeStatus(item.orderInfo.saleStatus).btnStaus == 2 || this.judgeStatus(item.orderInfo.saleStatus).btnStaus == 3) &&
+									<div className="btnBox">
+										<div className="emptyDiv"></div>
+										{
+											this.judgeStatus(item.orderInfo.saleStatus).btnStaus == 0 &&
+											<div className="btnRight"  data-orderId={item.orderInfo.orderNo}  onClick={this.gotoPay.bind(this)}>
+												<span className="noPay">立即支付</span>
+											</div>
+										}
+										{
+											this.judgeStatus(item.orderInfo.saleStatus).btnStaus == 2 &&
+											<div className="btnRight"  data-orderId={item.orderInfo.orderNo}>
+												<span className="receiving" data-orderId={item.orderInfo.orderNo} onClick={this.pleaseDelivery.bind(this)}>请求发货</span>
+												<span className="resell" data-btnStatus={this.judgeStatus(item.orderInfo.payStatus, item.orderInfo.orderStatus).btnStaus} data-orderId={item.orderInfo.orderNo} onClick={this.reSellBtn.bind(this)}>卖了赚钱</span>
+											</div>
+										}
+										{
+											this.judgeStatus(item.orderInfo.saleStatus).btnStaus == 3 &&
+											<div className="btnRight"  data-orderId={item.orderInfo.orderNo}>
+												<a className="servicePhone" href={`tel:+${constants.SERVICE_PHONE}`}>售后</a>
+												<span className="logistics" data-orderId={item.orderInfo.orderNo} onClick={this.lookLogistics.bind(this)}>查看物流</span>
+												<span className="receiving" data-orderId={item.orderInfo.orderNo} onClick={this.confirmReceipt.bind(this)}>确认收货</span>
+											</div>
+										}
+									</div>
+								}
 							</li>
 						)
 					})

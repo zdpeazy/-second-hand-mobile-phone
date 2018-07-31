@@ -13,11 +13,12 @@ class Submit extends React.Component {
   }
   goConfirmOrder(e){
     util.toastModel('请稍等，支付中...');
+    console.log(this.props.data)
     if(this.props.data.payWay == 1 || this.props.data.payWay == 3){
       util.toast('暂时未开通此支付方式');
       return;
     }
-    if(this.props.data.addressId == ''){
+    if(this.props.data.userAddressId == ''){
       util.toast('请添加收货地址');
       return;
     }

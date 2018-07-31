@@ -17,7 +17,7 @@ class TabBar extends React.Component {
   }
   render() {
     return (
-      <footer id="tabBar-box">
+      <footer id="tabBar-box" style={{'display': 'none'}}>
         <div className="tabBar-wrapper">
           <div className="tab-goodList" onClick={this.changeTab.bind(this)}>
             <span className={this.props.title==='二手手机' ? "icon active" : "icon"}></span>
