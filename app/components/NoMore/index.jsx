@@ -29,8 +29,10 @@ class NoMore extends React.Component {
           this.props.resource == 'orderList' &&
           <div>
             <img src={noMoreOrder} />
-            <p className="txt">当前还没有订单{<br/>}快去挑选你喜欢的商品</p>
-            <span className="btn" onClick={this.gotoGoodList.bind(this)}>去看看</span>
+            <p className="txt">当前还没有订单</p>
+            {/*
+              <span className="btn" onClick={this.gotoGoodList.bind(this)}>去看看</span>
+            */}
           </div>
         }
       </div>

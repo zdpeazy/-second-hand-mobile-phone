@@ -85,7 +85,7 @@ class App extends React.Component {
       let isToken = hash.indexOf('#/?') > -1 && userInfo.token != 'undefined',
           isPhone = hash.indexOf('#/?') > -1 && userInfo.isPhone != 'undefined';
       if(isToken && isPhone){
-        hashHistory.push('/GoodList');
+        hashHistory.push('/SellOrder');
       }
     });
   }
